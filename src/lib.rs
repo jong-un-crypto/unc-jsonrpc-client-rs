@@ -67,10 +67,10 @@ pub mod methods;
 
 use errors::*;
 
-pub const unc_MAINNET_RPC_URL: &str = "https://rpc.mainnet.unc.org";
-pub const unc_TESTNET_RPC_URL: &str = "https://rpc.testnet.unc.org";
-pub const unc_MAINNET_ARCHIVAL_RPC_URL: &str = "https://archival-rpc.mainnet.unc.org";
-pub const unc_TESTNET_ARCHIVAL_RPC_URL: &str = "https://archival-rpc.testnet.unc.org";
+pub const UNC_MAINNET_RPC_URL: &str = "https://rpc.mainnet.unc.org";
+pub const UNC_TESTNET_RPC_URL: &str = "https://rpc.testnet.unc.org";
+pub const UNC_MAINNET_ARCHIVAL_RPC_URL: &str = "https://archival-rpc.mainnet.unc.org";
+pub const UNC_TESTNET_ARCHIVAL_RPC_URL: &str = "https://archival-rpc.testnet.unc.org";
 
 lazy_static! {
     static ref DEFAULT_CONNECTOR: JsonRpcClientConnector = JsonRpcClient::new_client();
