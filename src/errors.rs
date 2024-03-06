@@ -3,8 +3,8 @@ use std::io;
 
 use thiserror::Error;
 
-use near_jsonrpc_primitives::errors::{RpcError, RpcErrorKind, RpcRequestValidationErrorKind};
-use near_jsonrpc_primitives::message::{self, Message};
+use unc_jsonrpc_primitives::errors::{RpcError, RpcErrorKind, RpcRequestValidationErrorKind};
+use unc_jsonrpc_primitives::message::{self, Message};
 
 /// Potential errors returned while sending a request to the RPC server.
 #[derive(Debug, Error)]

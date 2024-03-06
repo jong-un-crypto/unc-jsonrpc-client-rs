@@ -1,8 +1,8 @@
-use near_jsonrpc_client::methods;
+use unc_jsonrpc_client::methods;
 
 mod utils;
 
-pub fn specify_block_reference() -> std::io::Result<near_primitives::types::BlockReference> {
+pub fn specify_block_reference() -> std::io::Result<unc_primitives::types::BlockReference> {
     println!("=========[Block Reference]=========");
     let block_reference = utils::select(
         || {
@@ -14,13 +14,13 @@ pub fn specify_block_reference() -> std::io::Result<near_primitives::types::Bloc
         "\x1b[33m(enter a selection)\x1b[0m> ",
         |selection| match (selection, selection.parse()) {
             ("f" | "fin" | "final", _) | (_, Ok(1)) => {
-                Some(near_primitives::types::BlockReference::Finality(
-                    near_primitives::types::Finality::Final,
+                Some(unc_primitives::types::BlockReference::Finality(
+                    unc_primitives::types::Finality::Final,
                 ))
             }
             ("o" | "opt" | "optimistic", _) | (_, Ok(2)) => {
-                Some(near_primitives::types::BlockReference::Finality(
-                    near_primitives::types::Finality::None,
+                Some(unc_primitives::types::BlockReference::Finality(
+                    unc_primitives::types::Finality::None,
                 ))
             }
             ("s" | "hash" | "block hash", _) | (_, Ok(3)) => loop {
@@ -29,8 +29,8 @@ pub fn specify_block_reference() -> std::io::Result<near_primitives::types::Bloc
                     .parse()
                 {
                     Ok(block_hash) => {
-                        break Some(near_primitives::types::BlockReference::BlockId(
-                            near_primitives::types::BlockId::Hash(block_hash),
+                        break Some(unc_primitives::types::BlockReference::BlockId(
+                            unc_primitives::types::BlockId::Hash(block_hash),
                         ))
                     }
                     _ => println!("(i) Invalid block hash, please reenter!"),
@@ -42,8 +42,8 @@ pub fn specify_block_reference() -> std::io::Result<near_primitives::types::Bloc
                     .parse()
                 {
                     Ok(block_height) => {
-                        break Some(near_primitives::types::BlockReference::BlockId(
-                            near_primitives::types::BlockId::Height(block_height),
+                        break Some(unc_primitives::types::BlockReference::BlockId(
+                            unc_primitives::types::BlockId::Height(block_height),
                         ))
                     }
                     _ => println!("(i) Invalid block height, please reenter!"),

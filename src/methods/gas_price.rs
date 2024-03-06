@@ -3,17 +3,17 @@
 //! ## Examples
 //!
 //! Returns the gas fees for this block:
-//! <https://explorer.near.org/blocks/6atGq4TUTZerVHU9qWoYfzXNBg3K4C4cca15TE6KfuBr>
+//! <https://explorer.unc.org/blocks/6atGq4TUTZerVHU9qWoYfzXNBg3K4C4cca15TE6KfuBr>
 //!
 //! - `BlockId::Height`
 //!
 //!     ```
-//!     # use near_jsonrpc_client::{methods, JsonRpcClient};
-//!     use near_primitives::types::BlockId;
+//!     # use unc_jsonrpc_client::{methods, JsonRpcClient};
+//!     use unc_primitives::types::BlockId;
 //!
 //!     # #[tokio::main]
 //!     # async fn main() -> Result<(), Box<dyn std::error::Error>> {
-//!     let client = JsonRpcClient::connect("https://archival-rpc.mainnet.near.org");
+//!     let client = JsonRpcClient::connect("https://archival-rpc.mainnet.unc.org");
 //!
 //!     let request = methods::gas_price::RpcGasPriceRequest {
 //!         block_id: Some(BlockId::Height(61512623)),
@@ -32,12 +32,12 @@
 //! - `BlockId::Hash`
 //!
 //!     ```
-//!     # use near_jsonrpc_client::{methods, JsonRpcClient};
-//!     use near_primitives::types::BlockId;
+//!     # use unc_jsonrpc_client::{methods, JsonRpcClient};
+//!     use unc_primitives::types::BlockId;
 //!
 //!     # #[tokio::main]
 //!     # async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-//!     let client = JsonRpcClient::connect("https://archival-rpc.mainnet.near.org");
+//!     let client = JsonRpcClient::connect("https://archival-rpc.mainnet.unc.org");
 //!
 //!     let request = methods::gas_price::RpcGasPriceRequest {
 //!         block_id: Some(BlockId::Hash("6atGq4TUTZerVHU9qWoYfzXNBg3K4C4cca15TE6KfuBr".parse()?)),
@@ -54,9 +54,9 @@
 //!     ```
 use super::*;
 
-pub use near_jsonrpc_primitives::types::gas_price::{RpcGasPriceError, RpcGasPriceRequest};
+pub use unc_jsonrpc_primitives::types::gas_price::{RpcGasPriceError, RpcGasPriceRequest};
 
-pub type RpcGasPriceResponse = near_primitives::views::GasPriceView;
+pub type RpcGasPriceResponse = unc_primitives::views::GasPriceView;
 
 impl RpcHandlerResponse for RpcGasPriceResponse {}
 

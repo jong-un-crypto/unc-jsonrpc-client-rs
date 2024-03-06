@@ -1,7 +1,7 @@
-use near_jsonrpc_client::{methods, JsonRpcClient};
-use near_jsonrpc_primitives::types::query::QueryResponseKind;
-use near_primitives::types::{BlockReference, Finality, FunctionArgs};
-use near_primitives::views::QueryRequest;
+use unc_jsonrpc_client::{methods, JsonRpcClient};
+use unc_jsonrpc_primitives::types::query::QueryResponseKind;
+use unc_primitives::types::{BlockReference, Finality, FunctionArgs};
+use unc_primitives::views::QueryRequest;
 
 use serde::Deserialize;
 use serde_json::{from_slice, json};
@@ -19,7 +19,7 @@ pub struct AccountStatus {
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     env_logger::init();
 
-    let client = JsonRpcClient::connect("https://rpc.testnet.near.org");
+    let client = JsonRpcClient::connect("https://rpc.testnet.unc.org");
 
     let account_id = utils::input("Enter the account to view: ")?;
 

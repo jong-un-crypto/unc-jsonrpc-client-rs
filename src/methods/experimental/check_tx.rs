@@ -2,27 +2,27 @@
 //!
 //! This code sample doesn't make any request to the RPC node. It's been truncated for brevity sake.
 //!
-//! An example detailing how to construct a complete request can be found at [`contract_change_method`](https://github.com/near/near-jsonrpc-client-rs/blob/master/examples/contract_change_method.rs).
+//! An example detailing how to construct a complete request can be found at [`contract_change_method`](https://github.com/unc/unc-jsonrpc-client-rs/blob/master/examples/contract_change_method.rs).
 //!
 //! ## Example
 //!
 //! ```no_run
-//! use near_jsonrpc_client::{methods, JsonRpcClient};
-//! use near_jsonrpc_primitives::types::{query::QueryResponseKind, transactions};
-//! use near_primitives::types::{AccountId, BlockReference};
-//! use near_primitives::transaction::{Action, Transaction, FunctionCallAction};
-//! use near_crypto::SecretKey;
+//! use unc_jsonrpc_client::{methods, JsonRpcClient};
+//! use unc_jsonrpc_primitives::types::{query::QueryResponseKind, transactions};
+//! use unc_primitives::types::{AccountId, BlockReference};
+//! use unc_primitives::transaction::{Action, Transaction, FunctionCallAction};
+//! use unc_crypto::SecretKey;
 //! use core::str::FromStr;
 //! use serde_json::json;
 //!
 //! # #[tokio::main]
 //! # async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-//! let client = JsonRpcClient::connect("https://archival-rpc.testnet.near.org");
+//! let client = JsonRpcClient::connect("https://archival-rpc.testnet.unc.org");
 //!
 //! let signer_account_id = "fido.testnet".parse::<AccountId>()?;
 //! let signer_secret_key = SecretKey::from_str("ed25519:12dhevYshfiRqFSu8DSfxA27pTkmGRv6C5qQWTJYTcBEoB7MSTyidghi5NWXzWqrxCKgxVx97bpXPYQxYN5dieU")?;    // Replace secret_key with valid signer_secret_key
 //!
-//! let signer = near_crypto::InMemorySigner::from_secret_key(signer_account_id, signer_secret_key);
+//! let signer = unc_crypto::InMemorySigner::from_secret_key(signer_account_id, signer_secret_key);
 //!
 //! let other_account = "rpc_docs.testnet".parse::<AccountId>()?;
 //! let rating = "4.7".parse::<f32>()?;
@@ -54,10 +54,10 @@
 //! ```
 use super::*;
 
-pub use near_jsonrpc_primitives::types::transactions::{
+pub use unc_jsonrpc_primitives::types::transactions::{
     RpcBroadcastTxSyncResponse, RpcTransactionError,
 };
-pub use near_primitives::transaction::SignedTransaction;
+pub use unc_primitives::transaction::SignedTransaction;
 
 #[derive(Debug)]
 pub struct RpcCheckTxRequest {
@@ -65,12 +65,12 @@ pub struct RpcCheckTxRequest {
 }
 
 impl From<RpcCheckTxRequest>
-    for near_jsonrpc_primitives::types::transactions::RpcSendTransactionRequest
+    for unc_jsonrpc_primitives::types::transactions::RpcSendTransactionRequest
 {
     fn from(this: RpcCheckTxRequest) -> Self {
         Self {
             signed_transaction: this.signed_transaction,
-            wait_until: near_primitives::views::TxExecutionStatus::None,
+            wait_until: unc_primitives::views::TxExecutionStatus::None,
         }
     }
 }

@@ -5,17 +5,17 @@
 //!
 //! ```toml
 //! # in Cargo.toml
-//! near-jsonrpc-client = { ..., features = ["any"] }
+//! unc-jsonrpc-client = { ..., features = ["any"] }
 //! ```
 //!
 //! ```
 //! use serde::Deserialize;
 //! use serde_json::json;
 //!
-//! # use near_jsonrpc_client::errors::JsonRpcError;
-//! use near_jsonrpc_client::{methods, JsonRpcClient};
-//! use near_primitives::serialize::u128_dec_format;
-//! use near_primitives::types::*;
+//! # use unc_jsonrpc_client::errors::JsonRpcError;
+//! use unc_jsonrpc_client::{methods, JsonRpcClient};
+//! use unc_primitives::serialize::u128_dec_format;
+//! use unc_primitives::types::*;
 //!
 //! #[derive(Debug, Deserialize)]
 //! struct PartialGenesisConfig {
@@ -36,7 +36,7 @@
 //!
 //! # #[tokio::main]
 //! # async fn main() -> Result<(), JsonRpcError<()>> {
-//! let client = JsonRpcClient::connect("https://rpc.mainnet.near.org");
+//! let client = JsonRpcClient::connect("https://rpc.mainnet.unc.org");
 //!
 //! # #[cfg(feature = "any")] {
 //! let genesis_config_request = methods::any::<Result<PartialGenesisConfig, ()>>(

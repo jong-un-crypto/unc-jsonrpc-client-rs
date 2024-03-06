@@ -7,12 +7,12 @@
 //! - Get the validators for a specified epoch.
 //!
 //!   ```
-//!   use near_jsonrpc_client::{methods, JsonRpcClient};
-//!   use near_primitives::types::{EpochReference, EpochId, BlockReference, Finality};
+//!   use unc_jsonrpc_client::{methods, JsonRpcClient};
+//!   use unc_primitives::types::{EpochReference, EpochId, BlockReference, Finality};
 //!
 //!   # #[tokio::main]
 //!   # async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-//!   let client = JsonRpcClient::connect("https://archival-rpc.mainnet.near.org");
+//!   let client = JsonRpcClient::connect("https://archival-rpc.mainnet.unc.org");
 //!
 //!   let request = methods::validators::RpcValidatorRequest {
 //!       epoch_reference: EpochReference::EpochId(
@@ -33,12 +33,12 @@
 //! - Get the validators for the latest block.
 //!
 //!   ```
-//!   use near_jsonrpc_client::{methods, JsonRpcClient};
-//!   use near_primitives::types::{EpochReference, EpochId, BlockId};
+//!   use unc_jsonrpc_client::{methods, JsonRpcClient};
+//!   use unc_primitives::types::{EpochReference, EpochId, BlockId};
 //!
 //!   # #[tokio::main]
 //!   # async fn main() -> Result<(), Box<dyn std::error::Error>> {
-//!   let client = JsonRpcClient::connect("https://archival-rpc.mainnet.near.org");
+//!   let client = JsonRpcClient::connect("https://archival-rpc.mainnet.unc.org");
 //!
 //!   let request = methods::validators::RpcValidatorRequest {
 //!       epoch_reference: EpochReference::Latest
@@ -55,9 +55,9 @@
 //!   ```
 use super::*;
 
-pub use near_jsonrpc_primitives::types::validator::{RpcValidatorError, RpcValidatorRequest};
+pub use unc_jsonrpc_primitives::types::validator::{RpcValidatorError, RpcValidatorRequest};
 
-pub type RpcValidatorResponse = near_primitives::views::EpochValidatorInfo;
+pub type RpcValidatorResponse = unc_primitives::views::EpochValidatorInfo;
 
 impl RpcHandlerResponse for RpcValidatorResponse {}
 

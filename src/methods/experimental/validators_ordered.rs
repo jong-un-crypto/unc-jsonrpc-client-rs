@@ -2,15 +2,15 @@
 //!
 //! ## Example
 //!
-//! Returns the ordered validators for this [block](https://explorer.near.org/blocks/3Lq3Mtfpc3spH9oF5dXnUzvCBEqjTQwX1yCqKibwzgWR).
+//! Returns the ordered validators for this [block](https://explorer.unc.org/blocks/3Lq3Mtfpc3spH9oF5dXnUzvCBEqjTQwX1yCqKibwzgWR).
 //!
 //! ```
-//! use near_jsonrpc_client::{methods, JsonRpcClient};
-//! use near_primitives::types::BlockId;
+//! use unc_jsonrpc_client::{methods, JsonRpcClient};
+//! use unc_primitives::types::BlockId;
 //!
 //! # #[tokio::main]
 //! # async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-//! let client = JsonRpcClient::connect("https://archival-rpc.mainnet.near.org");
+//! let client = JsonRpcClient::connect("https://archival-rpc.mainnet.unc.org");
 //!
 //! let request = methods::EXPERIMENTAL_validators_ordered::RpcValidatorsOrderedRequest {
 //!     block_id: Some(BlockId::Hash("3Lq3Mtfpc3spH9oF5dXnUzvCBEqjTQwX1yCqKibwzgWR".parse()?))
@@ -27,7 +27,7 @@
 //! ```
 use super::*;
 
-pub use near_jsonrpc_primitives::types::validator::{
+pub use unc_jsonrpc_primitives::types::validator::{
     RpcValidatorError, RpcValidatorsOrderedRequest, RpcValidatorsOrderedResponse,
 };
 

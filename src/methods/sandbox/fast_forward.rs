@@ -5,7 +5,7 @@
 //! ## Example
 //!
 //! ```
-//! use near_jsonrpc_client::{methods, JsonRpcClient};
+//! use unc_jsonrpc_client::{methods, JsonRpcClient};
 //!
 //! # #[tokio::main]
 //! # async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -26,7 +26,7 @@
 //! ```
 use super::*;
 
-pub use near_jsonrpc_primitives::types::sandbox::{
+pub use unc_jsonrpc_primitives::types::sandbox::{
     RpcSandboxFastForwardError, RpcSandboxFastForwardRequest, RpcSandboxFastForwardResponse,
 };
 

@@ -1,7 +1,7 @@
-use near_jsonrpc_client::methods;
-use near_jsonrpc_primitives::types::query::QueryResponseKind;
-use near_primitives::types::{AccountId, BlockReference, Finality};
-use near_primitives::views::QueryRequest;
+use unc_jsonrpc_client::methods;
+use unc_jsonrpc_primitives::types::query::QueryResponseKind;
+use unc_primitives::types::{AccountId, BlockReference, Finality};
+use unc_primitives::views::QueryRequest;
 
 mod utils;
 

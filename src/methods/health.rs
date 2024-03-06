@@ -5,11 +5,11 @@
 //! Returns the current health stauts of the RPC node the client connects to.
 //!
 //! ```
-//! use near_jsonrpc_client::{methods, JsonRpcClient};
+//! use unc_jsonrpc_client::{methods, JsonRpcClient};
 //!
 //! # #[tokio::main]
 //! # async fn main() -> Result<(), Box<dyn std::error::Error>> {
-//! let client = JsonRpcClient::connect("https://rpc.testnet.near.org");
+//! let client = JsonRpcClient::connect("https://rpc.testnet.unc.org");
 //!
 //! let request = methods::health::RpcHealthRequest;
 //!
@@ -24,7 +24,7 @@
 //! ```
 use super::*;
 
-pub use near_jsonrpc_primitives::types::status::{RpcHealthResponse, RpcStatusError};
+pub use unc_jsonrpc_primitives::types::status::{RpcHealthResponse, RpcStatusError};
 
 #[derive(Debug)]
 pub struct RpcHealthRequest;

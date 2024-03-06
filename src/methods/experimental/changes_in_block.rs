@@ -1,20 +1,20 @@
 //! Returns the changes in a block.
 //!
-//! The `RpcStateChangesInBlockRequest` takes in a [`BlockReference`](https://docs.rs/near-primitives/0.12.0/near_primitives/types/enum.BlockReference.html) enum which has multiple variants.
+//! The `RpcStateChangesInBlockRequest` takes in a [`BlockReference`](https://docs.rs/unc-primitives/0.12.0/unc_primitives/types/enum.BlockReference.html) enum which has multiple variants.
 //!
 //! ## Example
 //!
-//! Returns the changes in block for <https://explorer.near.org/blocks/3Lq3Mtfpc3spH9oF5dXnUzvCBEqjTQwX1yCqKibwzgWR>
+//! Returns the changes in block for <https://explorer.unc.org/blocks/3Lq3Mtfpc3spH9oF5dXnUzvCBEqjTQwX1yCqKibwzgWR>
 //!
-//! You can also use the `Finality` and `SyncCheckpoint` variants of [`BlockReference`](https://docs.rs/near-primitives/0.12.0/near_primitives/types/enum.BlockReference.html) to return block change details.
+//! You can also use the `Finality` and `SyncCheckpoint` variants of [`BlockReference`](https://docs.rs/unc-primitives/0.12.0/unc_primitives/types/enum.BlockReference.html) to return block change details.
 //!
 //! ```
-//! use near_jsonrpc_client::{methods, JsonRpcClient};
-//! use near_primitives::types::{BlockReference, BlockId};
+//! use unc_jsonrpc_client::{methods, JsonRpcClient};
+//! use unc_primitives::types::{BlockReference, BlockId};
 //!
 //! # #[tokio::main]
 //! # async fn main() -> Result<(), Box<dyn std::error::Error>> {
-//! let client = JsonRpcClient::connect("https://archival-rpc.mainnet.near.org");
+//! let client = JsonRpcClient::connect("https://archival-rpc.mainnet.unc.org");
 //!
 //! let request = methods::EXPERIMENTAL_changes_in_block::RpcStateChangesInBlockRequest {
 //!     block_reference: BlockReference::BlockId(BlockId::Height(47988413))
@@ -31,7 +31,7 @@
 //! ```
 use super::*;
 
-pub use near_jsonrpc_primitives::types::changes::{
+pub use unc_jsonrpc_primitives::types::changes::{
     RpcStateChangesError, RpcStateChangesInBlockByTypeResponse, RpcStateChangesInBlockRequest,
 };
 

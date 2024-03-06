@@ -1,15 +1,15 @@
 //! Requests the status of the connected RPC node.
 //!
-//! This includes information about sync status, nearcore node version, protocol version, the current set of validators, etc.
+//! This includes information about sync status, unccore node version, protocol version, the current set of validators, etc.
 //!
 //! ## Example
 //!
 //! ```
-//! use near_jsonrpc_client::{methods, JsonRpcClient};
+//! use unc_jsonrpc_client::{methods, JsonRpcClient};
 //!
 //! # #[tokio::main]
 //! # async fn main() -> Result<(), Box<dyn std::error::Error>> {
-//! let client = JsonRpcClient::connect("https://rpc.testnet.near.org");
+//! let client = JsonRpcClient::connect("https://rpc.testnet.unc.org");
 //!
 //! let request = methods::status::RpcStatusRequest;
 //!
@@ -24,9 +24,9 @@
 //! ```
 use super::*;
 
-pub use near_jsonrpc_primitives::types::status::RpcStatusError;
+pub use unc_jsonrpc_primitives::types::status::RpcStatusError;
 
-pub type RpcStatusResponse = near_primitives::views::StatusResponse;
+pub type RpcStatusResponse = unc_primitives::views::StatusResponse;
 
 #[derive(Debug)]
 pub struct RpcStatusRequest;

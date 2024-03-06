@@ -1,6 +1,6 @@
 //! This module allows you to make generic requests to the network.
 //!
-//! The `RpcQueryRequest` struct takes in a [`BlockReference`](https://docs.rs/near-primitives/0.12.0/near_primitives/types/enum.BlockReference.html) and a [`QueryRequest`](https://docs.rs/near-primitives/0.12.0/near_primitives/views/enum.QueryRequest.html).
+//! The `RpcQueryRequest` struct takes in a [`BlockReference`](https://docs.rs/unc-primitives/0.12.0/unc_primitives/types/enum.BlockReference.html) and a [`QueryRequest`](https://docs.rs/unc-primitives/0.12.0/unc_primitives/views/enum.QueryRequest.html).
 //!
 //! The `BlockReference` enum allows you to specify a block by `Finality`, `BlockId` or `SyncCheckpoint`.
 //!
@@ -17,17 +17,17 @@
 //! ### Returns basic account information.
 //!
 //! ```
-//! use near_jsonrpc_client::{methods, JsonRpcClient};
-//! use near_primitives::{types::{BlockReference, BlockId}, views::QueryRequest};
+//! use unc_jsonrpc_client::{methods, JsonRpcClient};
+//! use unc_primitives::{types::{BlockReference, BlockId}, views::QueryRequest};
 //!
 //! # #[tokio::main]
 //! # async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-//! let client = JsonRpcClient::connect("https://archival-rpc.mainnet.near.org");
+//! let client = JsonRpcClient::connect("https://archival-rpc.mainnet.unc.org");
 //!
 //! let request = methods::query::RpcQueryRequest {
 //!     block_reference: BlockReference::BlockId(BlockId::Hash("6Qq9hYG7vQhnje4iC1hfbyhh9vNQoNem7j8Dxi7EVSdN".parse()?)),
 //!     request: QueryRequest::ViewAccount {
-//!         account_id: "itranscend.near".parse()?,
+//!         account_id: "itranscend.unc".parse()?,
 //!     }
 //! };
 //!
@@ -44,12 +44,12 @@
 //! ### Returns the contract code (Wasm binary) deployed to the account. The returned code will be encoded in base64.
 //!
 //! ```
-//! use near_jsonrpc_client::{methods, JsonRpcClient};
-//! use near_primitives::{types::{BlockReference, BlockId}, views::QueryRequest};
+//! use unc_jsonrpc_client::{methods, JsonRpcClient};
+//! use unc_primitives::{types::{BlockReference, BlockId}, views::QueryRequest};
 //!
 //! # #[tokio::main]
 //! # async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-//! let client = JsonRpcClient::connect("https://archival-rpc.testnet.near.org");
+//! let client = JsonRpcClient::connect("https://archival-rpc.testnet.unc.org");
 //!
 //! let request = methods::query::RpcQueryRequest {
 //!     block_reference: BlockReference::BlockId(BlockId::Hash("CrYzVUyam5TMJTcJDJMSJ7Fzc79SDTgtK1SfVpEnteZF".parse()?)),
@@ -71,12 +71,12 @@
 //! ### Returns the account state
 //!
 //! ```
-//! use near_jsonrpc_client::{methods, JsonRpcClient};
-//! use near_primitives::{types::{BlockReference, BlockId, StoreKey}, views::QueryRequest};
+//! use unc_jsonrpc_client::{methods, JsonRpcClient};
+//! use unc_primitives::{types::{BlockReference, BlockId, StoreKey}, views::QueryRequest};
 //!
 //! # #[tokio::main]
 //! # async fn main() -> Result<(), Box<dyn std::error::Error>> {
-//! let client = JsonRpcClient::connect("https://archival-rpc.testnet.near.org");
+//! let client = JsonRpcClient::connect("https://archival-rpc.testnet.unc.org");
 //!
 //! let request = methods::query::RpcQueryRequest {
 //!     // block_reference: BlockReference::BlockId(BlockId::Hash("AUDcb2iNUbsmCsmYGfGuKzyXKimiNcCZjBKTVsbZGnoH".parse()?)),
@@ -101,12 +101,12 @@
 //! ### Returns information about a single access key for given account
 //!
 //! ```
-//! use near_jsonrpc_client::{methods, JsonRpcClient};
-//! use near_primitives::{types::{BlockReference, BlockId}, views::QueryRequest};
+//! use unc_jsonrpc_client::{methods, JsonRpcClient};
+//! use unc_primitives::{types::{BlockReference, BlockId}, views::QueryRequest};
 //!
 //! # #[tokio::main]
 //! # async fn main() -> Result<(), Box<dyn std::error::Error>> {
-//! let client = JsonRpcClient::connect("https://archival-rpc.testnet.near.org");
+//! let client = JsonRpcClient::connect("https://archival-rpc.testnet.unc.org");
 //!
 //! let request = methods::query::RpcQueryRequest {
 //!     // block_reference: BlockReference::BlockId(BlockId::Hash("CA9bigchLBUYKaHKz3vQxK3Z7Fae2gnVabGrrLJrQEzp".parse()?)),
@@ -130,12 +130,12 @@
 //! ### Returns all access keys for a given account.
 //!
 //! ```
-//! use near_jsonrpc_client::{methods, JsonRpcClient};
-//! use near_primitives::{types::{BlockReference, BlockId}, views::QueryRequest};
+//! use unc_jsonrpc_client::{methods, JsonRpcClient};
+//! use unc_primitives::{types::{BlockReference, BlockId}, views::QueryRequest};
 //!
 //! # #[tokio::main]
 //! # async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-//! let client = JsonRpcClient::connect("https://archival-rpc.testnet.near.org");
+//! let client = JsonRpcClient::connect("https://archival-rpc.testnet.unc.org");
 //!
 //! let request = methods::query::RpcQueryRequest {
 //!     block_reference: BlockReference::BlockId(BlockId::Hash("AUDcb2iNUbsmCsmYGfGuKzyXKimiNcCZjBKTVsbZGnoH".parse()?)),
@@ -157,13 +157,13 @@
 //! ### Call a function in a contract deployed on the network
 //!
 //! ```
-//! use near_jsonrpc_client::{methods, JsonRpcClient};
-//! use near_primitives::{types::{BlockReference, BlockId, FunctionArgs}, views::QueryRequest};
+//! use unc_jsonrpc_client::{methods, JsonRpcClient};
+//! use unc_primitives::{types::{BlockReference, BlockId, FunctionArgs}, views::QueryRequest};
 //! use serde_json::json;
 //!
 //! # #[tokio::main]
 //! # async fn main() -> Result<(), Box<dyn std::error::Error>> {
-//! let client = JsonRpcClient::connect("https://archival-rpc.testnet.near.org");
+//! let client = JsonRpcClient::connect("https://archival-rpc.testnet.unc.org");
 //!
 //! let request = methods::query::RpcQueryRequest {
 //!     // block_reference: BlockReference::BlockId(BlockId::Hash("CA9bigchLBUYKaHKz3vQxK3Z7Fae2gnVabGrrLJrQEzp".parse()?)),
@@ -192,7 +192,7 @@
 //! ```
 use super::*;
 
-pub use near_jsonrpc_primitives::types::query::{RpcQueryError, RpcQueryRequest, RpcQueryResponse};
+pub use unc_jsonrpc_primitives::types::query::{RpcQueryError, RpcQueryRequest, RpcQueryResponse};
 
 impl RpcHandlerResponse for RpcQueryResponse {}
 
@@ -245,7 +245,7 @@ impl RpcMethod for RpcQueryRequest {
                     err_parts.next(),
                 ) {
                     let public_key = pk
-                        .parse::<near_crypto::PublicKey>()
+                        .parse::<unc_crypto::PublicKey>()
                         .map_err(serde::de::Error::custom)?;
                     RpcQueryError::UnknownAccessKey {
                         public_key,
@@ -276,8 +276,8 @@ enum QueryResponse {
 #[derive(serde::Deserialize)]
 struct LegacyQueryError {
     error: String,
-    block_height: near_primitives::types::BlockHeight,
-    block_hash: near_primitives::hash::CryptoHash,
+    block_height: unc_primitives::types::BlockHeight,
+    block_hash: unc_primitives::hash::CryptoHash,
 }
 
 #[cfg(test)]
@@ -287,11 +287,11 @@ mod tests {
     /// This test is to make sure the method executor treats `&RpcMethod`s the same as `RpcMethod`s.
     #[tokio::test]
     async fn test_unknown_method() -> Result<(), Box<dyn std::error::Error>> {
-        let client = JsonRpcClient::connect("https://rpc.testnet.near.org");
+        let client = JsonRpcClient::connect("https://rpc.testnet.unc.org");
 
         let request = RpcQueryRequest {
-            block_reference: near_primitives::types::BlockReference::latest(),
-            request: near_primitives::views::QueryRequest::CallFunction {
+            block_reference: unc_primitives::types::BlockReference::latest(),
+            request: unc_primitives::views::QueryRequest::CallFunction {
                 account_id: "testnet".parse()?,
                 method_name: "some_unavailable_method".to_string(),
                 args: vec![].into(),
@@ -317,13 +317,13 @@ mod tests {
 
     #[tokio::test]
     async fn test_unknown_access_key() -> Result<(), Box<dyn std::error::Error>> {
-        let client = JsonRpcClient::connect("https://archival-rpc.testnet.near.org");
+        let client = JsonRpcClient::connect("https://archival-rpc.testnet.unc.org");
 
         let request = RpcQueryRequest {
-            block_reference: near_primitives::types::BlockReference::BlockId(
-                near_primitives::types::BlockId::Height(63503911),
+            block_reference: unc_primitives::types::BlockReference::BlockId(
+                unc_primitives::types::BlockId::Height(63503911),
             ),
-            request: near_primitives::views::QueryRequest::ViewAccessKey {
+            request: unc_primitives::views::QueryRequest::ViewAccessKey {
                 account_id: "miraclx.testnet".parse()?,
                 public_key: "ed25519:9KnjTjL6vVoM8heHvCcTgLZ67FwFkiLsNtknFAVsVvYY".parse()?,
             },
@@ -349,13 +349,13 @@ mod tests {
 
     #[tokio::test]
     async fn test_contract_execution_error() -> Result<(), Box<dyn std::error::Error>> {
-        let client = JsonRpcClient::connect("https://archival-rpc.testnet.near.org");
+        let client = JsonRpcClient::connect("https://archival-rpc.testnet.unc.org");
 
         let request = RpcQueryRequest {
-            block_reference: near_primitives::types::BlockReference::BlockId(
-                near_primitives::types::BlockId::Height(63503911),
+            block_reference: unc_primitives::types::BlockReference::BlockId(
+                unc_primitives::types::BlockId::Height(63503911),
             ),
-            request: near_primitives::views::QueryRequest::CallFunction {
+            request: unc_primitives::views::QueryRequest::CallFunction {
                 account_id: "miraclx.testnet".parse()?,
                 method_name: "".to_string(),
                 args: vec![].into(),

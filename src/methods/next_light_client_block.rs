@@ -3,11 +3,11 @@
 //! ## Example
 //!
 //! ```
-//! use near_jsonrpc_client::{methods, JsonRpcClient};
+//! use unc_jsonrpc_client::{methods, JsonRpcClient};
 //!
 //! # #[tokio::main]
 //! # async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-//! let client = JsonRpcClient::connect("https://archival-rpc.mainnet.near.org");
+//! let client = JsonRpcClient::connect("https://archival-rpc.mainnet.unc.org");
 //!
 //! let request = methods::next_light_client_block::RpcLightClientNextBlockRequest {
 //!     last_block_hash: "ANm3jm5wq1Z4rJv6tXWyiDtC3wYKpXVHY4iq6bE1te7B".parse()?,
@@ -24,10 +24,10 @@
 //! ```
 use super::*;
 
-pub use near_jsonrpc_primitives::types::light_client::{
+pub use unc_jsonrpc_primitives::types::light_client::{
     RpcLightClientNextBlockError, RpcLightClientNextBlockRequest,
 };
-pub use near_primitives::views::LightClientBlockView;
+pub use unc_primitives::views::LightClientBlockView;
 
 pub type RpcLightClientNextBlockResponse = Option<LightClientBlockView>;
 

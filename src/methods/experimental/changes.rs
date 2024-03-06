@@ -9,12 +9,12 @@
 //! - `AccountChanges`
 //!
 //!     ```
-//!     # use near_jsonrpc_client::{methods, JsonRpcClient};
-//!     use near_primitives::{views::StateChangesRequestView, types::{BlockReference, BlockId}};
+//!     # use unc_jsonrpc_client::{methods, JsonRpcClient};
+//!     use unc_primitives::{views::StateChangesRequestView, types::{BlockReference, BlockId}};
 //!
 //!     # #[tokio::main]
 //!     # async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-//!     let client = JsonRpcClient::connect("https://archival-rpc.testnet.near.org");
+//!     let client = JsonRpcClient::connect("https://archival-rpc.testnet.unc.org");
 //!
 //!     let request = methods::EXPERIMENTAL_changes::RpcStateChangesInBlockByTypeRequest {
 //!         block_reference: BlockReference::BlockId(BlockId::Hash("94yBWhN848vHMnKcw5DxgBQWJW6JHRXnXD6FCLJGjxMU".parse()?)),
@@ -36,12 +36,12 @@
 //! - `SingleAccessKeyChanges`
 //!
 //!     ```
-//!     use near_jsonrpc_client::{methods, JsonRpcClient};
-//!     use near_primitives::{views::StateChangesRequestView, types::{BlockReference, BlockId, AccountWithPublicKey}};
+//!     use unc_jsonrpc_client::{methods, JsonRpcClient};
+//!     use unc_primitives::{views::StateChangesRequestView, types::{BlockReference, BlockId, AccountWithPublicKey}};
 //!
 //!     # #[tokio::main]
 //!     # async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-//!     let client = JsonRpcClient::connect("https://archival-rpc.testnet.near.org");
+//!     let client = JsonRpcClient::connect("https://archival-rpc.testnet.unc.org");
 //!
 //!     let request = methods::EXPERIMENTAL_changes::RpcStateChangesInBlockByTypeRequest {
 //!         block_reference: BlockReference::BlockId(BlockId::Hash("94yBWhN848vHMnKcw5DxgBQWJW6JHRXnXD6FCLJGjxMU".parse()?)),
@@ -73,12 +73,12 @@
 //! - `AllAccessKeyChanges`
 //!
 //!     ```
-//!     # use near_jsonrpc_client::{methods, JsonRpcClient};
-//!     use near_primitives::{views::StateChangesRequestView, types::{BlockReference, BlockId}};
+//!     # use unc_jsonrpc_client::{methods, JsonRpcClient};
+//!     use unc_primitives::{views::StateChangesRequestView, types::{BlockReference, BlockId}};
 //!
 //!     # #[tokio::main]
 //!     # async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-//!     let client = JsonRpcClient::connect("https://archival-rpc.testnet.near.org");
+//!     let client = JsonRpcClient::connect("https://archival-rpc.testnet.unc.org");
 //!
 //!     let request = methods::EXPERIMENTAL_changes::RpcStateChangesInBlockByTypeRequest {
 //!         block_reference: BlockReference::BlockId(BlockId::Hash("94yBWhN848vHMnKcw5DxgBQWJW6JHRXnXD6FCLJGjxMU".parse()?)),
@@ -100,12 +100,12 @@
 //! - `ContractCodeChanges`
 //!
 //!     ```
-//!     # use near_jsonrpc_client::{methods, JsonRpcClient};
-//!     use near_primitives::{views::StateChangesRequestView, types::{BlockReference, BlockId}};
+//!     # use unc_jsonrpc_client::{methods, JsonRpcClient};
+//!     use unc_primitives::{views::StateChangesRequestView, types::{BlockReference, BlockId}};
 //!
 //!     # #[tokio::main]
 //!     # async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-//!     let client = JsonRpcClient::connect("https://archival-rpc.testnet.near.org");
+//!     let client = JsonRpcClient::connect("https://archival-rpc.testnet.unc.org");
 //!
 //!     let request = methods::EXPERIMENTAL_changes::RpcStateChangesInBlockByTypeRequest {
 //!         block_reference: BlockReference::BlockId(BlockId::Hash("94yBWhN848vHMnKcw5DxgBQWJW6JHRXnXD6FCLJGjxMU".parse()?)),
@@ -127,12 +127,12 @@
 //! - `DataChanges`
 //!
 //!     ```
-//!     # use near_jsonrpc_client::{methods, JsonRpcClient};
-//!     use near_primitives::{views::StateChangesRequestView, types::{BlockReference, BlockId, StoreKey}, hash::CryptoHash};
+//!     # use unc_jsonrpc_client::{methods, JsonRpcClient};
+//!     use unc_primitives::{views::StateChangesRequestView, types::{BlockReference, BlockId, StoreKey}, hash::CryptoHash};
 //!
 //!     # #[tokio::main]
 //!     # async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-//!     let client = JsonRpcClient::connect("https://archival-rpc.testnet.near.org");
+//!     let client = JsonRpcClient::connect("https://archival-rpc.testnet.unc.org");
 //!
 //!     let request = methods::EXPERIMENTAL_changes::RpcStateChangesInBlockByTypeRequest {
 //!         block_reference: BlockReference::BlockId(BlockId::Hash("94yBWhN848vHMnKcw5DxgBQWJW6JHRXnXD6FCLJGjxMU".parse::<CryptoHash>()?)),
@@ -153,7 +153,7 @@
 //!     ```
 use super::*;
 
-pub use near_jsonrpc_primitives::types::changes::{
+pub use unc_jsonrpc_primitives::types::changes::{
     RpcStateChangesError, RpcStateChangesInBlockByTypeRequest, RpcStateChangesInBlockResponse,
 };
 

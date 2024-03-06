@@ -5,11 +5,11 @@
 //! ## Example
 //!
 //! ```
-//! use near_jsonrpc_client::{methods, JsonRpcClient};
+//! use unc_jsonrpc_client::{methods, JsonRpcClient};
 //!
 //! # #[tokio::main]
 //! # async fn main() -> Result<(), Box<dyn std::error::Error>> {
-//! let client = JsonRpcClient::connect("https://rpc.testnet.near.org");
+//! let client = JsonRpcClient::connect("https://rpc.testnet.unc.org");
 //!
 //! let request = methods::network_info::RpcNetworkInfoRequest;
 //!
@@ -24,7 +24,7 @@
 //! ```
 use super::*;
 
-pub use near_jsonrpc_primitives::types::network_info::{
+pub use unc_jsonrpc_primitives::types::network_info::{
     RpcNetworkInfoError, RpcNetworkInfoResponse,
 };
 

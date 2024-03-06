@@ -15,7 +15,7 @@ pub use reqwest::header::{HeaderName, HeaderValue, InvalidHeaderValue, ToStrErro
 /// This example adds the header name `custom-header` and value `custom:some-value`.
 ///
 /// ```
-/// use near_jsonrpc_client::{
+/// use unc_jsonrpc_client::{
 ///     header::{HeaderEntry, HeaderValue, Prevalidated},
 ///     methods, JsonRpcClient,
 /// };
@@ -39,7 +39,7 @@ pub use reqwest::header::{HeaderName, HeaderValue, InvalidHeaderValue, ToStrErro
 ///
 /// let header_value = HeaderValue::try_from("custom:some-value")?; // <- error handling here
 ///
-/// let client = JsonRpcClient::connect("https://rpc.testnet.near.org").header(CustomHeader(header_value));
+/// let client = JsonRpcClient::connect("https://rpc.testnet.unc.org").header(CustomHeader(header_value));
 /// # Ok(())
 /// # }
 pub struct Prevalidated {
@@ -56,7 +56,7 @@ pub struct Prevalidated {
 ///
 /// ```
 /// # use std::{fmt, error::Error};
-/// use near_jsonrpc_client::{
+/// use unc_jsonrpc_client::{
 ///     header::{HeaderEntry, HeaderValue, Postvalidated},
 ///     methods, JsonRpcClient,
 /// };
@@ -97,7 +97,7 @@ pub struct Prevalidated {
 /// # #[tokio::main]
 /// # async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ///
-/// let client = JsonRpcClient::connect("https://rpc.testnet.near.org")
+/// let client = JsonRpcClient::connect("https://rpc.testnet.unc.org")
 ///     .header(CustomHeader(CustomValue("some-value")))?; // <- error handling here
 /// # Ok(())
 /// # }

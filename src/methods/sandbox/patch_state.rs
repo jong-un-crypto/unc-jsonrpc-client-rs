@@ -7,8 +7,8 @@
 //! ## Examples
 //!
 //! ```
-//! use near_jsonrpc_client::{methods, JsonRpcClient};
-//! use near_primitives::{state_record::StateRecord, account, types::AccountId, hash::CryptoHash};
+//! use unc_jsonrpc_client::{methods, JsonRpcClient};
+//! use unc_primitives::{state_record::StateRecord, account, types::AccountId, hash::CryptoHash};
 //!
 //! # #[tokio::main]
 //! # async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -34,7 +34,7 @@
 //! ```
 use super::*;
 
-pub use near_jsonrpc_primitives::types::sandbox::{
+pub use unc_jsonrpc_primitives::types::sandbox::{
     RpcSandboxPatchStateError, RpcSandboxPatchStateRequest, RpcSandboxPatchStateResponse,
 };
 

@@ -1,17 +1,17 @@
 //! Returns the proofs for a transaction execution.
 //!
 //! ```
-//! use near_jsonrpc_client::{methods, JsonRpcClient};
-//! use near_primitives::types::TransactionOrReceiptId;
+//! use unc_jsonrpc_client::{methods, JsonRpcClient};
+//! use unc_primitives::types::TransactionOrReceiptId;
 //!
 //! # #[tokio::main]
 //! # async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-//! let client = JsonRpcClient::connect("https://archival-rpc.mainnet.near.org");
+//! let client = JsonRpcClient::connect("https://archival-rpc.mainnet.unc.org");
 //!
 //! let request = methods::light_client_proof::RpcLightClientExecutionProofRequest {
 //!     id: TransactionOrReceiptId::Transaction {
 //!         transaction_hash: "47sXP4jKXCMpkUS6kcxsfNU7tqysYr5fxWFdEXQkZh6z".parse()?,
-//!         sender_id: "aurora.pool.near".parse()?,
+//!         sender_id: "aurora.pool.unc".parse()?,
 //!     },
 //!     light_client_head: "ANm3jm5wq1Z4rJv6tXWyiDtC3wYKpXVHY4iq6bE1te7B".parse()?,
 //! };
@@ -27,7 +27,7 @@
 //! ```
 use super::*;
 
-pub use near_jsonrpc_primitives::types::light_client::{
+pub use unc_jsonrpc_primitives::types::light_client::{
     RpcLightClientExecutionProofRequest, RpcLightClientExecutionProofResponse,
     RpcLightClientProofError,
 };

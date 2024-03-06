@@ -1,7 +1,7 @@
-use near_jsonrpc_client::methods;
-use near_jsonrpc_primitives::types::query::QueryResponseKind;
-use near_primitives::types::{AccountId, BlockReference, Finality};
-use near_primitives::views::QueryRequest;
+use unc_jsonrpc_client::methods;
+use unc_jsonrpc_primitives::types::query::QueryResponseKind;
+use unc_primitives::types::{AccountId, BlockReference, Finality};
+use unc_primitives::views::QueryRequest;
 
 mod utils;
 
@@ -18,7 +18,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         block_reference: BlockReference::Finality(Finality::Final),
         request: QueryRequest::ViewState {
             account_id: contract_id.clone(),
-            prefix: near_primitives::types::StoreKey::from(Vec::new()),
+            prefix: unc_primitives::types::StoreKey::from(Vec::new()),
             include_proof: false,
         },
     };

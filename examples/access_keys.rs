@@ -1,6 +1,6 @@
-use near_jsonrpc_client::methods;
-use near_jsonrpc_primitives::types::query::QueryResponseKind;
-use near_primitives::types::BlockReference;
+use unc_jsonrpc_client::methods;
+use unc_jsonrpc_primitives::types::query::QueryResponseKind;
+use unc_primitives::types::BlockReference;
 
 mod utils;
 
@@ -26,7 +26,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let access_key_query_response = client
         .call(methods::query::RpcQueryRequest {
             block_reference: BlockReference::latest(),
-            request: near_primitives::views::QueryRequest::ViewAccessKeyList { account_id },
+            request: unc_primitives::views::QueryRequest::ViewAccessKeyList { account_id },
         })
         .await?;
 

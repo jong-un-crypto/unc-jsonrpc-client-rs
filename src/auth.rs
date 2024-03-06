@@ -10,12 +10,12 @@
 //! ### API Key (`x-api-key` Header)
 //!
 //! ```
-//! use near_jsonrpc_client::{JsonRpcClient, auth, methods};
-//! use near_primitives::types::{BlockReference, Finality};
+//! use unc_jsonrpc_client::{JsonRpcClient, auth, methods};
+//! use unc_primitives::types::{BlockReference, Finality};
 //!
 //! # #[tokio::main]
 //! # async fn main() -> Result<(), Box<dyn std::error::Error>> {
-//! let client = JsonRpcClient::connect("https://rpc.testnet.near.org");
+//! let client = JsonRpcClient::connect("https://rpc.testnet.unc.org");
 //!
 //! let client = client.header(auth::ApiKey::new("399ba741-e939-4ffa-8c3c-306ec36fa8de")?);
 //!
@@ -33,12 +33,12 @@
 //! ### `Authorization` Header
 //!
 //! ```
-//! use near_jsonrpc_client::{JsonRpcClient, auth, methods};
-//! use near_primitives::types::{BlockReference, Finality};
+//! use unc_jsonrpc_client::{JsonRpcClient, auth, methods};
+//! use unc_primitives::types::{BlockReference, Finality};
 //!
 //! # #[tokio::main]
 //! # async fn main() -> Result<(), Box<dyn std::error::Error>> {
-//! let client = JsonRpcClient::connect("https://rpc.testnet.near.org")
+//! let client = JsonRpcClient::connect("https://rpc.testnet.unc.org")
 //!     .header(auth::Authorization::bearer(
 //!         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
 //!     )?);
@@ -59,7 +59,7 @@ use std::str;
 
 use super::header::{HeaderValue, InvalidHeaderValue, ToStrError};
 
-/// NEAR JSON RPC API key.
+/// unc JSON RPC API key.
 #[derive(Eq, Hash, Clone, Debug, PartialEq)]
 pub struct ApiKey(HeaderValue);
 
@@ -109,7 +109,7 @@ pub enum AuthorizationScheme {
     Bearer,
 }
 
-/// NEAR JSON RPC authorization header.
+/// unc JSON RPC authorization header.
 #[derive(Eq, Hash, Clone, Debug, PartialEq)]
 pub struct Authorization(AuthorizationScheme, HeaderValue);
 

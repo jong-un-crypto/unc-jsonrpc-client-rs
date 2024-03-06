@@ -1,18 +1,18 @@
 //! Fetches a receipt by it's ID
 //!
-//! The `RpcReceiptRequest` takes in a [`ReceiptReference`](https://docs.rs/near-jsonrpc-primitives/0.12.0/near_jsonrpc_primitives/types/receipts/struct.ReceiptReference.html)
+//! The `RpcReceiptRequest` takes in a [`ReceiptReference`](https://docs.rs/unc-jsonrpc-primitives/0.12.0/unc_jsonrpc_primitives/types/receipts/struct.ReceiptReference.html)
 //!
 //! ## Example
 //!
-//! Returns the receipt for this [transaction](https://explorer.near.org/transactions/4nVcmhWkV8Y3uJp9VQWrJhfesncJERfrvt9WwDi77oEJ#3B5PPT9EKj5352Wks9GnCeSUBDsVvSF4ceMQv2nEULTf) on mainnet.
+//! Returns the receipt for this [transaction](https://explorer.unc.org/transactions/4nVcmhWkV8Y3uJp9VQWrJhfesncJERfrvt9WwDi77oEJ#3B5PPT9EKj5352Wks9GnCeSUBDsVvSF4ceMQv2nEULTf) on mainnet.
 //!
 //! ```
-//! use near_jsonrpc_client::{methods, JsonRpcClient};
-//! use near_jsonrpc_primitives::types::receipts::ReceiptReference;
+//! use unc_jsonrpc_client::{methods, JsonRpcClient};
+//! use unc_jsonrpc_primitives::types::receipts::ReceiptReference;
 //!
 //! # #[tokio::main]
 //! # async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-//! let client = JsonRpcClient::connect("https://archival-rpc.mainnet.near.org");
+//! let client = JsonRpcClient::connect("https://archival-rpc.mainnet.unc.org");
 //!
 //! let request = methods::EXPERIMENTAL_receipt::RpcReceiptRequest {
 //!     receipt_reference: ReceiptReference {
@@ -31,9 +31,9 @@
 //! ```
 use super::*;
 
-pub use near_jsonrpc_primitives::types::receipts::{RpcReceiptError, RpcReceiptRequest};
+pub use unc_jsonrpc_primitives::types::receipts::{RpcReceiptError, RpcReceiptRequest};
 
-pub type RpcReceiptResponse = near_primitives::views::ReceiptView;
+pub type RpcReceiptResponse = unc_primitives::views::ReceiptView;
 
 impl RpcHandlerResponse for RpcReceiptResponse {}
 

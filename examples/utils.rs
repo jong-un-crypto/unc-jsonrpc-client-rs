@@ -1,6 +1,6 @@
 #![allow(unused)]
 
-use near_jsonrpc_client::JsonRpcClient;
+use unc_jsonrpc_client::JsonRpcClient;
 use std::io::{self, Write};
 
 pub fn input(query: &str) -> io::Result<String> {
@@ -63,7 +63,7 @@ pub fn select_network() -> io::Result<JsonRpcClient> {
             }
         );
         format!(
-            "https://{archival}rpc.{network}.near.org",
+            "https://{archival}rpc.{network}.unc.org",
             archival = if archival { "archival-" } else { "" },
             network = network
         )

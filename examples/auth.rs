@@ -1,14 +1,14 @@
-use near_jsonrpc_client::errors::{
+use unc_jsonrpc_client::errors::{
     JsonRpcError::ServerError, JsonRpcServerError::ResponseStatusError,
     JsonRpcServerResponseStatusError::Unauthorized,
 };
-use near_jsonrpc_client::{auth, methods, JsonRpcClient};
-use near_primitives::types::{BlockReference, Finality};
+use unc_jsonrpc_client::{auth, methods, JsonRpcClient};
+use unc_primitives::types::{BlockReference, Finality};
 
 mod utils;
 
 async fn unauthorized() -> Result<(), Box<dyn std::error::Error>> {
-    let client = JsonRpcClient::connect("https://near-mainnet.api.pagoda.co/rpc/v1/");
+    let client = JsonRpcClient::connect("https://unc-mainnet.api.pagoda.co/rpc/v1/");
 
     let request = methods::block::RpcBlockRequest {
         block_reference: BlockReference::Finality(Finality::Final),
@@ -29,7 +29,7 @@ async fn unauthorized() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 async fn authorized(api_key: &str) -> Result<(), Box<dyn std::error::Error>> {
-    let client = JsonRpcClient::connect("https://near-mainnet.api.pagoda.co/rpc/v1/")
+    let client = JsonRpcClient::connect("https://unc-mainnet.api.pagoda.co/rpc/v1/")
         .header(auth::ApiKey::new(api_key)?);
 
     let request = methods::block::RpcBlockRequest {

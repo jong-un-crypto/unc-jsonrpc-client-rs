@@ -6,25 +6,25 @@
 //!
 //! This code sample doesn't make any requests to the RPC node. It only shows how to construct the request. It's been truncated for brevity.
 //!
-//! A full example on how to use `broadcast_tx_commit` method can be found at [`contract_change_method`](https://github.com/near/near-jsonrpc-client-rs/blob/master/examples/contract_change_method_commit.rs).
+//! A full example on how to use `broadcast_tx_commit` method can be found at [`contract_change_method`](https://github.com/unc/unc-jsonrpc-client-rs/blob/master/examples/contract_change_method_commit.rs).
 //!
 //! ## Example
 //!
 //! ```no_run
-//! use near_jsonrpc_client::{methods, JsonRpcClient};
-//! use near_jsonrpc_primitives::types::{query::QueryResponseKind, transactions::TransactionInfo};
-//! use near_primitives::types::{AccountId, BlockReference};
-//! use near_primitives::transaction::{Action, FunctionCallAction, Transaction};
+//! use unc_jsonrpc_client::{methods, JsonRpcClient};
+//! use unc_jsonrpc_primitives::types::{query::QueryResponseKind, transactions::TransactionInfo};
+//! use unc_primitives::types::{AccountId, BlockReference};
+//! use unc_primitives::transaction::{Action, FunctionCallAction, Transaction};
 //! use serde_json::json;
 //!
 //! # #[tokio::main]
 //! # async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-//! let client = JsonRpcClient::connect("https://archival-rpc.testnet.near.org");
+//! let client = JsonRpcClient::connect("https://archival-rpc.testnet.unc.org");
 //!
 //! let signer_account_id = "fido.testnet".parse::<AccountId>()?;
 //! let signer_secret_key = "ed25519:12dhevYshfiRqFSu8DSfxA27pTkmGRv6C5qQWTJYTcBEoB7MSTyidghi5NWXzWqrxCKgxVx97bpXPYQxYN5dieU".parse()?;
 //!
-//! let signer = near_crypto::InMemorySigner::from_secret_key(signer_account_id, signer_secret_key);
+//! let signer = unc_crypto::InMemorySigner::from_secret_key(signer_account_id, signer_secret_key);
 //!
 //! let other_account = "rpc_docs.testnet".parse::<AccountId>()?;
 //! let rating = "4.5".parse::<f32>()?;
@@ -56,10 +56,10 @@
 //! ```
 use super::*;
 
-pub use near_jsonrpc_primitives::types::transactions::RpcTransactionError;
-pub use near_primitives::transaction::SignedTransaction;
+pub use unc_jsonrpc_primitives::types::transactions::RpcTransactionError;
+pub use unc_primitives::transaction::SignedTransaction;
 
-pub type RpcBroadcastTxCommitResponse = near_primitives::views::FinalExecutionOutcomeView;
+pub type RpcBroadcastTxCommitResponse = unc_primitives::views::FinalExecutionOutcomeView;
 
 #[derive(Debug)]
 pub struct RpcBroadcastTxCommitRequest {
@@ -67,12 +67,12 @@ pub struct RpcBroadcastTxCommitRequest {
 }
 
 impl From<RpcBroadcastTxCommitRequest>
-    for near_jsonrpc_primitives::types::transactions::RpcSendTransactionRequest
+    for unc_jsonrpc_primitives::types::transactions::RpcSendTransactionRequest
 {
     fn from(this: RpcBroadcastTxCommitRequest) -> Self {
         Self {
             signed_transaction: this.signed_transaction,
-            wait_until: near_primitives::views::TxExecutionStatus::None,
+            wait_until: unc_primitives::views::TxExecutionStatus::None,
         }
     }
 }

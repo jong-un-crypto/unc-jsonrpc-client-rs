@@ -1,13 +1,13 @@
 [package]
-name = "near-jsonrpc-client"
-version = "0.8.0"
-authors = ["Near Inc <hello@nearprotocol.com>"]
+name = "unc-jsonrpc-client"
+version = "0.1.0"
+authors = ["unc Inc <hello@uncprotocol.com>"]
 edition = "2021"
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/near/near-jsonrpc-client-rs"
-description = "Lower-level API for interfacing with the NEAR Protocol via JSONRPC"
+repository = "https://github.com/unc/unc-jsonrpc-client-rs"
+description = "Lower-level API for interfacing with the unc Protocol via JSONRPC"
 categories = ["asynchronous", "api-bindings", "network-programming"]
-keywords = ["near", "api", "jsonrpc", "rpc", "async"]
+keywords = ["unc", "api", "jsonrpc", "rpc", "async"]
 rust-version = "1.67.1"
 
 [dependencies]
@@ -19,10 +19,10 @@ thiserror = "1.0.37"
 serde_json = "1.0.85"
 lazy_static = "1.4.0"
 
-near-crypto = "0.20.0"
-near-primitives = "0.20.0"
-near-chain-configs = "0.20.0"
-near-jsonrpc-primitives = "0.20.0"
+unc-crypto = "0.1.0"
+unc-primitives = "0.1.0"
+unc-chain-configs = "0.1.0"
+unc-jsonrpc-primitives = "0.1.0"
 
 [dev-dependencies]
 tokio = { version = "1.0", features = ["macros", "rt-multi-thread"] }

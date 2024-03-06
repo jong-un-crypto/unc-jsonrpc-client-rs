@@ -4,20 +4,20 @@
 //! - a top-level mainnet / testnet account
 //! - or a sub-account for any account on the network.
 //!
-//! top-level account example: `miraclx.near` creates `foobar.near`
-//! sub-account example: `miraclx.near` creates `test.miraclx.near`
+//! top-level account example: `miraclx.unc` creates `foobar.unc`
+//! sub-account example: `miraclx.unc` creates `test.miraclx.unc`
 //!
 //! This script is interactive.
 
-use near_jsonrpc_client::methods::broadcast_tx_commit::RpcTransactionError;
-use near_jsonrpc_client::{methods, JsonRpcClient};
-use near_jsonrpc_primitives::types::query::QueryResponseKind;
-use near_jsonrpc_primitives::types::transactions::TransactionInfo;
-use near_primitives::hash::CryptoHash;
-use near_primitives::transaction::{
+use unc_jsonrpc_client::methods::broadcast_tx_commit::RpcTransactionError;
+use unc_jsonrpc_client::{methods, JsonRpcClient};
+use unc_jsonrpc_primitives::types::query::QueryResponseKind;
+use unc_jsonrpc_primitives::types::transactions::TransactionInfo;
+use unc_primitives::hash::CryptoHash;
+use unc_primitives::transaction::{
     Action, AddKeyAction, CreateAccountAction, FunctionCallAction, Transaction, TransferAction,
 };
-use near_primitives::types::{AccountId, BlockReference};
+use unc_primitives::types::{AccountId, BlockReference};
 
 use serde_json::json;
 use tokio::time;
@@ -31,7 +31,7 @@ async fn account_exists(
     let access_key_query_response = client
         .call(methods::query::RpcQueryRequest {
             block_reference: BlockReference::latest(),
-            request: near_primitives::views::QueryRequest::ViewAccount {
+            request: unc_primitives::views::QueryRequest::ViewAccount {
                 account_id: account_id.clone(),
             },
         })
@@ -39,9 +39,9 @@ async fn account_exists(
 
     match access_key_query_response {
         Ok(_) => Ok(true),
-        Err(near_jsonrpc_client::errors::JsonRpcError::ServerError(
-            near_jsonrpc_client::errors::JsonRpcServerError::HandlerError(
-                near_jsonrpc_primitives::types::query::RpcQueryError::UnknownAccount { .. },
+        Err(unc_jsonrpc_client::errors::JsonRpcError::ServerError(
+            unc_jsonrpc_client::errors::JsonRpcServerError::HandlerError(
+                unc_jsonrpc_primitives::types::query::RpcQueryError::UnknownAccount { .. },
             ),
         )) => Ok(false),
         Err(res) => Err(res)?,
@@ -51,12 +51,12 @@ async fn account_exists(
 async fn get_current_nonce(
     client: &JsonRpcClient,
     account_id: &AccountId,
-    public_key: &near_crypto::PublicKey,
+    public_key: &unc_crypto::PublicKey,
 ) -> Result<Option<(CryptoHash, u64)>, Box<dyn std::error::Error>> {
     let query_response = client
         .call(methods::query::RpcQueryRequest {
             block_reference: BlockReference::latest(),
-            request: near_primitives::views::QueryRequest::ViewAccessKey {
+            request: unc_primitives::views::QueryRequest::ViewAccessKey {
                 account_id: account_id.clone(),
                 public_key: public_key.clone(),
             },
@@ -71,9 +71,9 @@ async fn get_current_nonce(
             ))),
             _ => Err("failed to extract current nonce")?,
         },
-        Err(near_jsonrpc_client::errors::JsonRpcError::ServerError(
-            near_jsonrpc_client::errors::JsonRpcServerError::HandlerError(
-                near_jsonrpc_primitives::types::query::RpcQueryError::UnknownAccessKey { .. },
+        Err(unc_jsonrpc_client::errors::JsonRpcError::ServerError(
+            unc_jsonrpc_client::errors::JsonRpcServerError::HandlerError(
+                unc_jsonrpc_primitives::types::query::RpcQueryError::UnknownAccessKey { .. },
             ),
         )) => Ok(None),
         Err(res) => Err(res)?,
@@ -97,7 +97,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let (signer, latest_hash, current_nonce) = loop {
         let signer_secret_key = utils::input("Enter the creators's private key: ")?.parse()?;
 
-        let signer = near_crypto::InMemorySigner::from_secret_key(
+        let signer = unc_crypto::InMemorySigner::from_secret_key(
             signer_account_id.clone(),
             signer_secret_key,
         );
@@ -129,7 +129,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     };
 
     let is_sub_account = new_account_id.is_sub_account_of(&signer.account_id);
-    let new_key_pair = near_crypto::SecretKey::from_random(near_crypto::KeyType::ED25519);
+    let new_key_pair = unc_crypto::SecretKey::from_random(unc_crypto::KeyType::ED25519);
 
     let transaction = if is_sub_account {
         Transaction {
@@ -141,9 +141,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             actions: vec![
                 Action::CreateAccount(CreateAccountAction {}),
                 Action::AddKey(Box::new(AddKeyAction {
-                    access_key: near_primitives::account::AccessKey {
+                    access_key: unc_primitives::account::AccessKey {
                         nonce: 0,
-                        permission: near_primitives::account::AccessKeyPermission::FullAccess,
+                        permission: unc_primitives::account::AccessKeyPermission::FullAccess,
                     },
                     public_key: new_key_pair.public_key(),
                 })),
@@ -153,10 +153,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             ],
         }
     } else {
-        let contract_id = if client.server_addr().ends_with("testnet.near.org") {
+        let contract_id = if client.server_addr().ends_with("testnet.unc.org") {
             "testnet".parse()?
-        } else if client.server_addr().ends_with("mainnet.near.org") {
-            "near".parse()?
+        } else if client.server_addr().ends_with("mainnet.unc.org") {
+            "unc".parse()?
         } else {
             Err("can only create non-sub accounts for mainnet / testnet\nconsider creating a sub-account instead")?
         };
@@ -216,8 +216,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
         match response {
             Ok(
-                ref outcome @ near_primitives::views::FinalExecutionOutcomeView {
-                    status: near_primitives::views::FinalExecutionStatus::SuccessValue(ref s),
+                ref outcome @ unc_primitives::views::FinalExecutionOutcomeView {
+                    status: unc_primitives::views::FinalExecutionStatus::SuccessValue(ref s),
                     ..
                 },
             ) => {
@@ -230,8 +230,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                 }
                 break;
             }
-            Ok(near_primitives::views::FinalExecutionOutcomeView {
-                status: near_primitives::views::FinalExecutionStatus::Failure(err),
+            Ok(unc_primitives::views::FinalExecutionOutcomeView {
+                status: unc_primitives::views::FinalExecutionStatus::Failure(err),
                 ..
             }) => {
                 println!("{:#?}", err);

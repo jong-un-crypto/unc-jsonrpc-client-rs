@@ -1,4 +1,4 @@
-//! Lower-level API for interfacing with the NEAR Protocol via JSONRPC.
+//! Lower-level API for interfacing with the unc Protocol via JSONRPC.
 //!
 //! ## Layout
 //!
@@ -17,11 +17,11 @@
 //!
 //!    ```
 //!    # #![allow(deprecated)]
-//!    use near_jsonrpc_client::{methods, JsonRpcClient};
+//!    use unc_jsonrpc_client::{methods, JsonRpcClient};
 //!
 //!    # #[tokio::main]
 //!    # async fn main() -> Result<(), Box<dyn std::error::Error>> {
-//!    let client = JsonRpcClient::connect("https://rpc.testnet.near.org");
+//!    let client = JsonRpcClient::connect("https://rpc.testnet.unc.org");
 //!
 //!    let request = methods::status::RpcStatusRequest; // no params
 //!
@@ -36,17 +36,17 @@
 //! 2. Query transaction status from mainnet RPC
 //!
 //!    ```no_run
-//!    use near_jsonrpc_client::{methods, JsonRpcClient};
-//!    use near_jsonrpc_primitives::types::transactions::TransactionInfo;
+//!    use unc_jsonrpc_client::{methods, JsonRpcClient};
+//!    use unc_jsonrpc_primitives::types::transactions::TransactionInfo;
 //!
 //!    # #[tokio::main]
 //!    # async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-//!    let client = JsonRpcClient::connect("https://archival-rpc.mainnet.near.org");
+//!    let client = JsonRpcClient::connect("https://archival-rpc.mainnet.unc.org");
 //!
 //!    let tx_status_request = methods::tx::RpcTransactionStatusRequest {
 //!        transaction_info: TransactionInfo::TransactionId {
 //!            tx_hash: "9FtHUFBQsZ2MG77K3x3MJ9wjX3UT8zE1TczCrhZEcG8U".parse()?,
-//!            sender_account_id: "miraclx.near".parse()?,
+//!            sender_account_id: "miraclx.unc".parse()?,
 //!        },
 //!    };
 //!
@@ -67,16 +67,16 @@ pub mod methods;
 
 use errors::*;
 
-pub const NEAR_MAINNET_RPC_URL: &str = "https://rpc.mainnet.near.org";
-pub const NEAR_TESTNET_RPC_URL: &str = "https://rpc.testnet.near.org";
-pub const NEAR_MAINNET_ARCHIVAL_RPC_URL: &str = "https://archival-rpc.mainnet.near.org";
-pub const NEAR_TESTNET_ARCHIVAL_RPC_URL: &str = "https://archival-rpc.testnet.near.org";
+pub const unc_MAINNET_RPC_URL: &str = "https://rpc.mainnet.unc.org";
+pub const unc_TESTNET_RPC_URL: &str = "https://rpc.testnet.unc.org";
+pub const unc_MAINNET_ARCHIVAL_RPC_URL: &str = "https://archival-rpc.mainnet.unc.org";
+pub const unc_TESTNET_ARCHIVAL_RPC_URL: &str = "https://archival-rpc.testnet.unc.org";
 
 lazy_static! {
     static ref DEFAULT_CONNECTOR: JsonRpcClientConnector = JsonRpcClient::new_client();
 }
 
-/// NEAR JSON RPC client connector.
+/// unc JSON RPC client connector.
 #[derive(Clone)]
 pub struct JsonRpcClientConnector {
     client: reqwest::Client,
@@ -103,19 +103,19 @@ struct JsonRpcInnerClient {
 }
 
 #[derive(Clone)]
-/// A NEAR JSON RPC Client.
+/// A unc JSON RPC Client.
 ///
-/// This is the main struct that you will use to interact with the NEAR JSON RPC API.
+/// This is the main struct that you will use to interact with the unc JSON RPC API.
 ///
 /// ## Example
 ///
 ///```
-/// use near_jsonrpc_client::{methods, JsonRpcClient};
-/// use near_primitives::types::{BlockReference, Finality};
+/// use unc_jsonrpc_client::{methods, JsonRpcClient};
+/// use unc_primitives::types::{BlockReference, Finality};
 ///
 /// # #[tokio::main]
 /// # async fn main() -> Result<(), Box<dyn std::error::Error>> {
-/// let client = JsonRpcClient::connect("https://rpc.testnet.near.org");
+/// let client = JsonRpcClient::connect("https://rpc.testnet.unc.org");
 ///
 /// let request = methods::block::RpcBlockRequest {
 ///     block_reference: BlockReference::Finality(Finality::Final),
@@ -143,9 +143,9 @@ impl JsonRpcClient {
     /// ## Example
     ///
     /// ```
-    /// use near_jsonrpc_client::JsonRpcClient;
+    /// use unc_jsonrpc_client::JsonRpcClient;
     ///
-    /// let client = JsonRpcClient::connect("https://rpc.testnet.near.org");
+    /// let client = JsonRpcClient::connect("https://rpc.testnet.unc.org");
     /// ```
     pub fn connect<U: AsUrl>(server_addr: U) -> JsonRpcClient {
         DEFAULT_CONNECTOR.connect(server_addr)
@@ -158,10 +158,10 @@ impl JsonRpcClient {
     /// ## Example
     ///
     /// ```
-    /// # use near_jsonrpc_client::JsonRpcClient;
-    /// let client = JsonRpcClient::connect("https://rpc.testnet.near.org");
+    /// # use unc_jsonrpc_client::JsonRpcClient;
+    /// let client = JsonRpcClient::connect("https://rpc.testnet.unc.org");
     ///
-    /// assert_eq!(client.server_addr(), "https://rpc.testnet.near.org");
+    /// assert_eq!(client.server_addr(), "https://rpc.testnet.unc.org");
     /// ```
     pub fn server_addr(&self) -> &str {
         &self.inner.server_addr
@@ -172,11 +172,11 @@ impl JsonRpcClient {
     /// ## Example
     ///
     /// ```
-    /// use near_jsonrpc_client::{methods, JsonRpcClient};
+    /// use unc_jsonrpc_client::{methods, JsonRpcClient};
     ///
     /// # #[tokio::main]
     /// # async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    /// let client = JsonRpcClient::connect("https://rpc.testnet.near.org");
+    /// let client = JsonRpcClient::connect("https://rpc.testnet.unc.org");
     ///
     /// let request = methods::status::RpcStatusRequest;
     /// let response = client.call(request).await?;
@@ -249,7 +249,7 @@ impl JsonRpcClient {
             log::debug!("response payload: {:#}", response_payload);
         }
 
-        let response_message = near_jsonrpc_primitives::message::decoded_to_parsed(
+        let response_message = unc_jsonrpc_primitives::message::decoded_to_parsed(
             response_payload.and_then(serde_json::from_value),
         )
         .map_err(|err| {
@@ -258,7 +258,7 @@ impl JsonRpcClient {
             ))
         })?;
 
-        if let near_jsonrpc_primitives::message::Message::Response(response) = response_message {
+        if let unc_jsonrpc_primitives::message::Message::Response(response) = response_message {
             return M::parse_handler_response(response.result?)
                 .map_err(|err| {
                     JsonRpcError::TransportError(RpcTransportError::RecvError(
@@ -282,14 +282,14 @@ impl JsonRpcClient {
     /// ### Example
     ///
     /// ```
-    /// use near_jsonrpc_client::JsonRpcClient;
+    /// use unc_jsonrpc_client::JsonRpcClient;
     ///
     /// # #[tokio::main]
     /// # async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    /// let client = JsonRpcClient::connect("https://rpc.testnet.near.org");
+    /// let client = JsonRpcClient::connect("https://rpc.testnet.unc.org");
     /// let client = client.header(("user-agent", "someclient/0.1.0"))?; // <- returns a result
     ///
-    /// use near_jsonrpc_client::auth;
+    /// use unc_jsonrpc_client::auth;
     ///
     /// let client = client.header(
     ///     auth::ApiKey::new("cadc4c83-5566-4c94-aa36-773605150f44")?, // <- error handling here
@@ -326,11 +326,11 @@ impl JsonRpcClient {
     /// ## Example
     ///
     /// ```
-    /// # use near_jsonrpc_client::JsonRpcClient;
+    /// # use unc_jsonrpc_client::JsonRpcClient;
     /// let client_connector = JsonRpcClient::new_client();
     ///
-    /// let mainnet_client = client_connector.connect("https://rpc.mainnet.near.org");
-    /// let testnet_client = client_connector.connect("https://rpc.testnet.near.org");
+    /// let mainnet_client = client_connector.connect("https://rpc.mainnet.unc.org");
+    /// let testnet_client = client_connector.connect("https://rpc.testnet.unc.org");
     /// ```
     pub fn new_client() -> JsonRpcClientConnector {
         let mut headers = reqwest::header::HeaderMap::with_capacity(2);
@@ -355,7 +355,7 @@ impl JsonRpcClient {
     /// ## Example
     ///
     /// ```
-    /// use near_jsonrpc_client::JsonRpcClient;
+    /// use unc_jsonrpc_client::JsonRpcClient;
     ///
     /// # #[tokio::main]
     /// # async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -363,7 +363,7 @@ impl JsonRpcClient {
     ///     .proxy(reqwest::Proxy::all("https://192.168.1.1:4825")?)
     ///     .build()?;
     ///
-    /// let testnet_client = JsonRpcClient::with(web_client).connect("https://rpc.testnet.near.org");
+    /// let testnet_client = JsonRpcClient::with(web_client).connect("https://rpc.testnet.unc.org");
     /// # Ok(())
     /// # }
     /// ```
@@ -410,7 +410,7 @@ mod tests {
 
     #[tokio::test]
     async fn chk_status_testnet() {
-        let client = JsonRpcClient::connect("https://rpc.testnet.near.org");
+        let client = JsonRpcClient::connect("https://rpc.testnet.unc.org");
 
         let status = client.call(methods::status::RpcStatusRequest).await;
 
@@ -424,14 +424,14 @@ mod tests {
     #[tokio::test]
     #[cfg(feature = "any")]
     async fn any_typed_ok() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-        let client = JsonRpcClient::connect("https://archival-rpc.mainnet.near.org");
+        let client = JsonRpcClient::connect("https://archival-rpc.mainnet.unc.org");
 
         let tx_status = client
             .call(methods::any::<methods::tx::RpcTransactionStatusRequest>(
                 "tx",
                 serde_json::json!([
                     "9FtHUFBQsZ2MG77K3x3MJ9wjX3UT8zE1TczCrhZEcG8U",
-                    "miraclx.near",
+                    "miraclx.unc",
                 ]),
             ))
             .await;
@@ -440,7 +440,7 @@ mod tests {
             matches!(
                 tx_status,
                 Ok(methods::tx::RpcTransactionStatusResponse { ref transaction, .. })
-                if transaction.signer_id == "miraclx.near"
+                if transaction.signer_id == "miraclx.unc"
                 && transaction.hash == "9FtHUFBQsZ2MG77K3x3MJ9wjX3UT8zE1TczCrhZEcG8U".parse()?
             ),
             "expected an Ok(RpcTransactionStatusResponse) with matching signer_id + hash, found [{:?}]",
@@ -453,14 +453,14 @@ mod tests {
     #[tokio::test]
     #[cfg(feature = "any")]
     async fn any_typed_err() -> Result<(), Box<dyn std::error::Error>> {
-        let client = JsonRpcClient::connect("https://archival-rpc.mainnet.near.org");
+        let client = JsonRpcClient::connect("https://archival-rpc.mainnet.unc.org");
 
         let tx_error = client
             .call(methods::any::<methods::tx::RpcTransactionStatusRequest>(
                 "tx",
                 serde_json::json!([
                     "9FtHUFBQsZ2MG77K3x3MJ9wjX3UT8zE1TczCrhZEcG8D",
-                    "youser.near",
+                    "youser.unc",
                 ]),
             ))
             .await
@@ -484,7 +484,7 @@ mod tests {
     #[tokio::test]
     #[cfg(feature = "any")]
     async fn any_untyped_ok() {
-        let client = JsonRpcClient::connect("https://archival-rpc.mainnet.near.org");
+        let client = JsonRpcClient::connect("https://archival-rpc.mainnet.unc.org");
 
         let status = client
             .call(
@@ -492,7 +492,7 @@ mod tests {
                     "tx",
                     serde_json::json!([
                         "9FtHUFBQsZ2MG77K3x3MJ9wjX3UT8zE1TczCrhZEcG8U",
-                        "miraclx.near",
+                        "miraclx.unc",
                     ]),
                 ),
             )
@@ -500,7 +500,7 @@ mod tests {
             .expect("request must not fail");
 
         assert_eq!(
-            status["transaction"]["signer_id"], "miraclx.near",
+            status["transaction"]["signer_id"], "miraclx.unc",
             "expected a tx_status with matching signer_id, [{:#}]",
             status
         );
@@ -514,7 +514,7 @@ mod tests {
     #[tokio::test]
     #[cfg(feature = "any")]
     async fn any_untyped_err() {
-        let client = JsonRpcClient::connect("https://archival-rpc.mainnet.near.org");
+        let client = JsonRpcClient::connect("https://archival-rpc.mainnet.unc.org");
 
         let tx_error = client
             .call(
@@ -522,7 +522,7 @@ mod tests {
                     "tx",
                     serde_json::json!([
                         "9FtHUFBQsZ2MG77K3x3MJ9wjX3UT8zE1TczCrhZEcG8D",
-                        "youser.near",
+                        "youser.unc",
                     ]),
                 ),
             )

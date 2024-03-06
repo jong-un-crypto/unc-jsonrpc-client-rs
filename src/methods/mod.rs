@@ -9,7 +9,7 @@ mod private {
     pub trait Sealed {}
 }
 
-/// A trait identifying valid NEAR JSON-RPC methods.
+/// A trait identifying valid unc JSON-RPC methods.
 pub trait RpcMethod: private::Sealed
 where
     Self::Response: RpcHandlerResponse,
@@ -52,14 +52,14 @@ where
     }
 }
 
-/// A trait identifying valid NEAR JSON-RPC method responses.
+/// A trait identifying valid unc JSON-RPC method responses.
 pub trait RpcHandlerResponse: serde::de::DeserializeOwned {
     fn parse(value: serde_json::Value) -> Result<Self, serde_json::Error> {
         serde_json::from_value(value)
     }
 }
 
-/// A trait identifying valid NEAR JSON-RPC errors.
+/// A trait identifying valid unc JSON-RPC errors.
 pub trait RpcHandlerError: serde::de::DeserializeOwned {
     /// Parser for the `.error_struct` field in RpcError.
     fn parse(handler_error: serde_json::Value) -> Result<Self, serde_json::Error> {
@@ -148,7 +148,7 @@ pub use adversarial::adv_check_store;
 
 /// Converts an RPC Method into JSON.
 pub fn to_json<M: RpcMethod>(method: &M) -> Result<serde_json::Value, io::Error> {
-    let request_payload = near_jsonrpc_primitives::message::Message::request(
+    let request_payload = unc_jsonrpc_primitives::message::Message::request(
         method.method_name().to_string(),
         method.params()?,
     );
@@ -180,9 +180,9 @@ mod common {
     pub(crate) use _parse_unknown_block as parse_unknown_block;
 
     pub fn serialize_signed_transaction(
-        tx: &near_primitives::transaction::SignedTransaction,
+        tx: &unc_primitives::transaction::SignedTransaction,
     ) -> Result<String, io::Error> {
-        Ok(near_primitives::serialize::to_base64(&borsh::to_vec(&tx)?))
+        Ok(unc_primitives::serialize::to_base64(&borsh::to_vec(&tx)?))
     }
 
     // adv_*
@@ -212,14 +212,14 @@ mod common {
     }
 
     // broadcast_tx_commit, tx
-    impl RpcHandlerResponse for near_primitives::views::FinalExecutionOutcomeView {}
+    impl RpcHandlerResponse for unc_primitives::views::FinalExecutionOutcomeView {}
 
     // broadcast_tx_commit, tx, EXPERIMENTAL_check_tx, EXPERIMENTAL_tx_status
-    impl RpcHandlerError for near_jsonrpc_primitives::types::transactions::RpcTransactionError {
+    impl RpcHandlerError for unc_jsonrpc_primitives::types::transactions::RpcTransactionError {
         fn parse_legacy_error(value: serde_json::Value) -> Option<Result<Self, serde_json::Error>> {
-            match serde_json::from_value::<near_jsonrpc_primitives::errors::ServerError>(value) {
-                Ok(near_jsonrpc_primitives::errors::ServerError::TxExecutionError(
-                    near_primitives::errors::TxExecutionError::InvalidTxError(context),
+            match serde_json::from_value::<unc_jsonrpc_primitives::errors::ServerError>(value) {
+                Ok(unc_jsonrpc_primitives::errors::ServerError::TxExecutionError(
+                    unc_primitives::errors::TxExecutionError::InvalidTxError(context),
                 )) => Some(Ok(Self::InvalidTransaction { context })),
                 Err(err) => Some(Err(err)),
                 _ => None,
@@ -228,10 +228,10 @@ mod common {
     }
 
     // health, status
-    impl RpcHandlerError for near_jsonrpc_primitives::types::status::RpcStatusError {}
+    impl RpcHandlerError for unc_jsonrpc_primitives::types::status::RpcStatusError {}
 
     // EXPERIMENTAL_changes, EXPERIMENTAL_changes_in_block
-    impl RpcHandlerError for near_jsonrpc_primitives::types::changes::RpcStateChangesError {
+    impl RpcHandlerError for unc_jsonrpc_primitives::types::changes::RpcStateChangesError {
         fn parse(value: serde_json::Value) -> Result<Self, serde_json::Error> {
             parse_unknown_block!(value => Self)
         }
@@ -239,10 +239,10 @@ mod common {
 
     // EXPERIMENTAL_broadcast_tx_sync, EXPERIMENTAL_check_tx
     impl RpcHandlerResponse
-        for near_jsonrpc_primitives::types::transactions::RpcBroadcastTxSyncResponse
+        for unc_jsonrpc_primitives::types::transactions::RpcBroadcastTxSyncResponse
     {
     }
 
     // validators, EXPERIMENTAL_validators_ordered
-    impl RpcHandlerError for near_jsonrpc_primitives::types::validator::RpcValidatorError {}
+    impl RpcHandlerError for unc_jsonrpc_primitives::types::validator::RpcValidatorError {}
 }

@@ -11,13 +11,13 @@
 //!     - `BlockId::Hash`
 //!
 //!       ```
-//!       use near_jsonrpc_client::{methods, JsonRpcClient};
-//!       use near_jsonrpc_primitives::types::chunks;
-//!       use near_primitives::types::BlockId;
+//!       use unc_jsonrpc_client::{methods, JsonRpcClient};
+//!       use unc_jsonrpc_primitives::types::chunks;
+//!       use unc_primitives::types::BlockId;
 //!
 //!       # #[tokio::main]
 //!       # async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-//!       let client = JsonRpcClient::connect("https://archival-rpc.mainnet.near.org");
+//!       let client = JsonRpcClient::connect("https://archival-rpc.mainnet.unc.org");
 //!
 //!       let request = methods::chunk::RpcChunkRequest {
 //!           chunk_reference: chunks::ChunkReference::BlockShardId {
@@ -39,13 +39,13 @@
 //!     - `BlockId::Height`
 //!
 //!       ```
-//!       use near_jsonrpc_client::{methods, JsonRpcClient};
-//!       use near_jsonrpc_primitives::types::chunks;
-//!       use near_primitives::types::BlockId;
+//!       use unc_jsonrpc_client::{methods, JsonRpcClient};
+//!       use unc_jsonrpc_primitives::types::chunks;
+//!       use unc_primitives::types::BlockId;
 //!
 //!       # #[tokio::main]
 //!       # async fn main() -> Result<(), Box<dyn std::error::Error>> {
-//!       let client = JsonRpcClient::connect("https://archival-rpc.mainnet.near.org");
+//!       let client = JsonRpcClient::connect("https://archival-rpc.mainnet.unc.org");
 //!
 //!       let request = methods::chunk::RpcChunkRequest {
 //!           chunk_reference: chunks::ChunkReference::BlockShardId {
@@ -68,12 +68,12 @@
 //! - `ChunkHash`: Query a chunk by a specific reference via it's associated chunk hash.
 //!
 //!   ```
-//!   use near_jsonrpc_client::{methods, JsonRpcClient};
-//!   use near_jsonrpc_primitives::types::chunks;
+//!   use unc_jsonrpc_client::{methods, JsonRpcClient};
+//!   use unc_jsonrpc_primitives::types::chunks;
 //!
 //!   # #[tokio::main]
 //!   # async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-//!   let client = JsonRpcClient::connect("https://archival-rpc.mainnet.near.org");
+//!   let client = JsonRpcClient::connect("https://archival-rpc.mainnet.unc.org");
 //!
 //!   let request = methods::chunk::RpcChunkRequest{
 //!       chunk_reference: chunks::ChunkReference::ChunkHash {
@@ -92,9 +92,9 @@
 //!   ```
 use super::*;
 
-pub use near_jsonrpc_primitives::types::chunks::{RpcChunkError, RpcChunkRequest};
+pub use unc_jsonrpc_primitives::types::chunks::{RpcChunkError, RpcChunkRequest};
 
-pub type RpcChunkResponse = near_primitives::views::ChunkView;
+pub type RpcChunkResponse = unc_primitives::views::ChunkView;
 
 impl RpcHandlerResponse for RpcChunkResponse {}
 

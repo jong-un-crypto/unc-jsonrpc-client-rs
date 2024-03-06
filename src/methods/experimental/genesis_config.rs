@@ -5,11 +5,11 @@
 //! Returns the genesis config of the network.
 //!
 //! ```
-//! use near_jsonrpc_client::{methods, JsonRpcClient};
+//! use unc_jsonrpc_client::{methods, JsonRpcClient};
 //!
 //! # #[tokio::main]
 //! # async fn main() -> Result<(), Box<dyn std::error::Error>> {
-//! let client = JsonRpcClient::connect("https://rpc.mainnet.near.org");
+//! let client = JsonRpcClient::connect("https://rpc.mainnet.unc.org");
 //!
 //! let request = methods::EXPERIMENTAL_genesis_config::RpcGenesisConfigRequest;
 //!
@@ -24,7 +24,7 @@
 //! ```
 use super::*;
 
-pub type RpcGenesisConfigResponse = near_chain_configs::GenesisConfig;
+pub type RpcGenesisConfigResponse = unc_chain_configs::GenesisConfig;
 
 #[derive(Debug)]
 pub struct RpcGenesisConfigRequest;

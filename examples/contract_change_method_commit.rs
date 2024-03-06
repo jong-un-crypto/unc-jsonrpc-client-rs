@@ -1,7 +1,7 @@
-use near_jsonrpc_client::{methods, JsonRpcClient};
-use near_jsonrpc_primitives::types::query::QueryResponseKind;
-use near_primitives::transaction::{Action, FunctionCallAction, Transaction};
-use near_primitives::types::BlockReference;
+use unc_jsonrpc_client::{methods, JsonRpcClient};
+use unc_jsonrpc_primitives::types::query::QueryResponseKind;
+use unc_primitives::transaction::{Action, FunctionCallAction, Transaction};
+use unc_primitives::types::BlockReference;
 
 use serde_json::json;
 
@@ -11,17 +11,17 @@ mod utils;
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     env_logger::init();
 
-    let client = JsonRpcClient::connect("https://rpc.testnet.near.org");
+    let client = JsonRpcClient::connect("https://rpc.testnet.unc.org");
 
     let signer_account_id = utils::input("Enter the signer Account ID: ")?.parse()?;
     let signer_secret_key = utils::input("Enter the signer's private key: ")?.parse()?;
 
-    let signer = near_crypto::InMemorySigner::from_secret_key(signer_account_id, signer_secret_key);
+    let signer = unc_crypto::InMemorySigner::from_secret_key(signer_account_id, signer_secret_key);
 
     let access_key_query_response = client
         .call(methods::query::RpcQueryRequest {
             block_reference: BlockReference::latest(),
-            request: near_primitives::views::QueryRequest::ViewAccessKey {
+            request: unc_primitives::views::QueryRequest::ViewAccessKey {
                 account_id: signer.account_id.clone(),
                 public_key: signer.public_key.clone(),
             },
